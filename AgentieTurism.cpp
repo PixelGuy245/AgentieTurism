@@ -9,7 +9,7 @@ int main()
 
     //Clasa Turist
     char nume[] = "Andrei", prenume[] = "Victor", nr_telefon[] ="0773293229";
-    int varsta = 7;
+    int varsta = 17;
     Turist turist1 = Turist(nume, prenume, nr_telefon, varsta);
     std::cout << turist1.getNume() << " " << turist1.getPrenume() << " " << turist1.getTelefon() << " " << turist1.getVarsta() << "\n";
     Turist turist2(turist1);
