@@ -8,6 +8,8 @@ class Turist
     int varsta;
 
     public:
+
+    //Constructor
     Turist(const char *nume, const char *prenume, const char *nr_telefon, int varsta)
     {
         this -> nume = new char[strlen(nume)+1];
@@ -22,6 +24,8 @@ class Turist
         this -> varsta = varsta;
     }
 
+
+    //Copiator
     Turist(const Turist& nou)
     {
         this -> nume = new char[strlen(nou.nume)+1];
@@ -36,6 +40,7 @@ class Turist
         this -> varsta = nou.varsta;
     }
 
+    //Gettere
     char* getNume() const
     {
         char *nume_get = new char[strlen(nume)+1];
@@ -62,6 +67,7 @@ class Turist
         return varsta;
     }
 
+    //Settere
     void setNume(const char* nume)
     {
         delete[] this -> nume;
@@ -88,6 +94,7 @@ class Turist
         this -> varsta = varsta;
     }
 
+    //Destructor
     ~Turist()
     {
         delete[] nume;

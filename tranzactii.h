@@ -8,6 +8,8 @@ class Tranzactie
     int suma_tranzactie;
 
     public:
+
+    //Constructor
 Tranzactie(const char *nume_beneficiar, const char *prenume_beneficiar, const char *nume_serviciu, const char *data_tranzactie, int suma_tranzactie)
     {
         this -> nume_serviciu = new char[strlen(nume_serviciu)+1];
@@ -25,6 +27,7 @@ Tranzactie(const char *nume_beneficiar, const char *prenume_beneficiar, const ch
         this -> suma_tranzactie = suma_tranzactie;
     }
 
+    //Copiator
     Tranzactie(const Tranzactie& nou)
     {
         this -> nume_serviciu = new char[strlen(nou.nume_serviciu)+1];
@@ -42,6 +45,7 @@ Tranzactie(const char *nume_beneficiar, const char *prenume_beneficiar, const ch
         this -> suma_tranzactie = nou.suma_tranzactie;
     }
 
+    //Gettere
     char* getNumeServiciu() const
     {
         char *nume_serviciu_get = new char[strlen(nume_serviciu)+1];
@@ -75,6 +79,7 @@ Tranzactie(const char *nume_beneficiar, const char *prenume_beneficiar, const ch
         return suma_tranzactie;
     }
 
+    //Settere
     void setNumeServiciu(const char* nume_serviciu)
     {
         delete[] this -> nume_serviciu;
@@ -96,7 +101,7 @@ Tranzactie(const char *nume_beneficiar, const char *prenume_beneficiar, const ch
         strcpy(this -> nume_beneficiar, nume_beneficiar);
     }
 
-    void setDataTranzactie(const char* nume_abonat)
+    void setDataTranzactie(const char* data_tranzactie)
     {
         delete[] this -> data_tranzactie;
         this -> data_tranzactie = new char[strlen(data_tranzactie)+1];
@@ -108,6 +113,7 @@ Tranzactie(const char *nume_beneficiar, const char *prenume_beneficiar, const ch
         this -> suma_tranzactie = suma_tranzactie;
     }
 
+    //Destructor
     ~Tranzactie()
     {
         delete[] nume_serviciu;

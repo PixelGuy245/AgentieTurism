@@ -9,6 +9,7 @@ private:
 
 public:
 
+    //Constructor
     Serviciu(const char *nume_serviciu, const char *locatie, const char *data_plecare, const char *data_intoarcere, int cost, int locuri_disponibile)
     {
         this->nume_serviciu = new char[strlen(nume_serviciu) + 1];
@@ -28,6 +29,7 @@ public:
         this->locuri_disponibile = locuri_disponibile;
     }
 
+    //Copiator
     Serviciu(const Serviciu& nou)
     {
         this->nume_serviciu = new char[strlen(nou.nume_serviciu) + 1];
@@ -47,6 +49,7 @@ public:
         this->locuri_disponibile = nou.locuri_disponibile;
     }
 
+    //Gettere
     char* getNumeServiciu() const
     {
         char *nume_serviciu_get = new char[strlen(nume_serviciu) + 1];
@@ -80,6 +83,7 @@ public:
         return cost;
     }
 
+    //Functie getter pentru calculare cost pentru persoane specifice
     double getCost(const Turist& t) const 
     {
         double cost_final = (double)this -> cost;
@@ -95,6 +99,7 @@ public:
         return locuri_disponibile;
     }
 
+    //Settere
     void setNumeServiciu(const char* nume)
     {
         delete[] this->nume_serviciu;
@@ -133,6 +138,8 @@ public:
         this->locuri_disponibile = locuri_disponibile;
     }
 
+
+    //Functie de calculat numarul de zile de durata ale serviciului
     int DurataServiciului() const 
     {
         int ziua1 = (data_plecare[0] - '0') * 10 + (data_plecare[1] - '0');
@@ -150,6 +157,7 @@ public:
         return total_zile;
     }
 
+    //Destructor
     ~Serviciu()
     {
         delete[] nume_serviciu;
