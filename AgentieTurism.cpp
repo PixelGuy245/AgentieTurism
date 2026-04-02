@@ -1,15 +1,26 @@
 #include <iostream>
 #include <cstring>
 #include "turisti.h"
-#include "tranzactii.h"
 #include "servicii.h"
+#include "tranzactii.h"
 
+void afiseazaServiciu(const Serviciu& s)
+    {   
+        std::cout << "Detalii Serviciu\n";
+        std::cout << "Nume: " << s.nume_serviciu << "\n";
+        std::cout << "Locatie: " << s.locatie << "\n";
+        std::cout << "Data plecare: " << s.data_plecare << "\n";
+        std::cout << "Data intoarcere: " << s.data_intoarcere << "\n";
+        std::cout << "Cost: " << s.cost << " RON\n";
+        std::cout << "Locuri disponibile: " << s.locuri_disponibile << "\n";
+    }
+    
 int main()
 {
 
     //Clasa Turist
     char nume[] = "Andrei", prenume[] = "Victor", nr_telefon[] ="0773293229";
-    int varsta = 17;
+    int varsta = 7;
     Turist turist1 = Turist(nume, prenume, nr_telefon, varsta);
     std::cout << turist1.getNume() << " " << turist1.getPrenume() << " " << turist1.getTelefon() << " " << turist1.getVarsta() << "\n";
     Turist turist2(turist1);
@@ -46,18 +57,21 @@ int main()
     std::cout << serviciu1.getCost(turist1)<< "\n";
     std::cout << serviciu1.getCost(turist2)<< "\n";
 
+    //Funcie prietena de afisare
+    afiseazaServiciu(serviciu1);
+
 
     //Clasa Tranzactie
-    char nume_beneficiar[] = "Tudose",  prenume_beneficiar[] = "Antonia", nume_tranzactie[] = "Vacanta la Roma!", data_tranzactie[] = "12_03_26";
+    char  data_tranzactie[] = "12_03_26";
     int suma = 1200;
-    Tranzactie tranzactie1 = Tranzactie(nume_beneficiar, prenume_beneficiar, nume_tranzactie, data_tranzactie, suma);
-    std::cout << tranzactie1.getNumeBeneficiar() << " " << tranzactie1.getPrenumeBeneficiar() << " " << tranzactie1.getNumeServiciu() << " " << tranzactie1.getDataTranzactie() << " " << tranzactie1.getSumaTranzactie() << "\n";
+    Tranzactie tranzactie1 = Tranzactie(&turist1,  &serviciu1, data_tranzactie);
+    std::cout << tranzactie1.getNume() << " " << tranzactie1.getPrenume() << " " << tranzactie1.getNumeServiciu() << " " << tranzactie1.getDataTranzactie() << " " << tranzactie1.getSumaTranzactie() << "\n";
     Tranzactie tranzactie2(tranzactie1);
-    std::cout << tranzactie2.getNumeBeneficiar() << " " << tranzactie2.getPrenumeBeneficiar() << " " << tranzactie2.getNumeServiciu() << " " << tranzactie2.getDataTranzactie() << " " << tranzactie2.getSumaTranzactie() << "\n";
-    tranzactie2.setNumeBeneficiar("Ana");
-    tranzactie2.setPrenumeBeneficiar("Maria");
-    tranzactie2.setNumeServiciu("Vacanta la Oz!");
-    tranzactie2.setDataTranzactie("26_03_24");
-    std::cout << tranzactie2.getNumeBeneficiar() << " " << tranzactie2.getPrenumeBeneficiar() << " " << tranzactie2.getNumeServiciu() << " " << tranzactie2.getDataTranzactie() << " " << tranzactie2.getSumaTranzactie() << "\n";
+    std::cout << tranzactie2.getNume() << " " << tranzactie2.getPrenume() << " " << tranzactie2.getNumeServiciu() << " " << tranzactie2.getDataTranzactie() << " " << tranzactie2.getSumaTranzactie()  << "\n";
+    Tranzactie tranzactie3 = Tranzactie(&turist2,  &serviciu1, data_tranzactie);
+    std::cout << tranzactie3.getNume() << " " << tranzactie3.getPrenume() << " " << tranzactie3.getNumeServiciu() << " " << tranzactie3.getDataTranzactie() << " " << tranzactie3.getSumaTranzactie()  << "\n";
+    Tranzactie tranzactie4 = Tranzactie(&turist2,  &serviciu2, data_tranzactie);
+    std::cout << tranzactie4.getNume() << " " << tranzactie4.getPrenume() << " " << tranzactie4.getNumeServiciu() << " " << tranzactie4.getDataTranzactie() << " " << tranzactie4.getSumaTranzactie()  << "\n";
+
     return 0;
 }

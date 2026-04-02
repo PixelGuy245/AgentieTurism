@@ -9,6 +9,9 @@ private:
 
 public:
 
+    //Functie prietena
+    friend void afiseazaServiciu(const Serviciu& s);
+
     //Constructor
     Serviciu(const char *nume_serviciu, const char *locatie, const char *data_plecare, const char *data_intoarcere, int cost, int locuri_disponibile)
     {

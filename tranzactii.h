@@ -4,67 +4,50 @@
 class Tranzactie
 {
     private:
-    char *nume_beneficiar, *prenume_beneficiar, *nume_serviciu, *data_tranzactie;
-    int suma_tranzactie;
+    Turist* beneficiar;
+    Serviciu* serviciu; 
+    char *data_tranzactie;
 
     public:
 
     //Constructor
-Tranzactie(const char *nume_beneficiar, const char *prenume_beneficiar, const char *nume_serviciu, const char *data_tranzactie, int suma_tranzactie)
+Tranzactie(Turist* turist_date,  Serviciu* serviciu_date, const char *data_tranzactie)
     {
-        this -> nume_serviciu = new char[strlen(nume_serviciu)+1];
-        strcpy(this -> nume_serviciu, nume_serviciu);
+        this -> beneficiar = turist_date;
 
-        this -> prenume_beneficiar = new char[strlen(prenume_beneficiar)+1];
-        strcpy(this -> prenume_beneficiar, prenume_beneficiar);
-
-        this -> nume_beneficiar = new char[strlen(nume_beneficiar)+1];
-        strcpy(this -> nume_beneficiar, nume_beneficiar);
+        this -> serviciu = serviciu_date;
 
         this -> data_tranzactie = new char[strlen(data_tranzactie)+1];
         strcpy(this -> data_tranzactie, data_tranzactie);
-
-        this -> suma_tranzactie = suma_tranzactie;
     }
 
     //Copiator
     Tranzactie(const Tranzactie& nou)
     {
-        this -> nume_serviciu = new char[strlen(nou.nume_serviciu)+1];
-        strcpy(this -> nume_serviciu, nou.nume_serviciu);
+        this -> beneficiar = nou.beneficiar;
 
-        this -> prenume_beneficiar = new char[strlen(nou.prenume_beneficiar)+1];
-        strcpy(this -> prenume_beneficiar, nou.prenume_beneficiar);
-
-        this -> nume_beneficiar = new char[strlen(nou.nume_beneficiar)+1];
-        strcpy(this -> nume_beneficiar, nou.nume_beneficiar);
+        this -> serviciu = nou.serviciu;
 
         this -> data_tranzactie = new char[strlen(nou.data_tranzactie)+1];
         strcpy(this -> data_tranzactie, nou.data_tranzactie);
 
-        this -> suma_tranzactie = nou.suma_tranzactie;
     }
 
     //Gettere
+
+    char* getNume() const
+    {
+        return this -> beneficiar -> getNume();
+    }
+
+    char* getPrenume() const
+    {
+        return this -> beneficiar -> getPrenume();
+    }
+
     char* getNumeServiciu() const
     {
-        char *nume_serviciu_get = new char[strlen(nume_serviciu)+1];
-        strcpy(nume_serviciu_get, nume_serviciu);
-        return nume_serviciu_get; 
-    }
-
-    char* getPrenumeBeneficiar() const
-    {
-        char *prenume_beneficiar_get = new char[strlen(prenume_beneficiar)+1];
-        strcpy(prenume_beneficiar_get, prenume_beneficiar);
-        return prenume_beneficiar_get; 
-    }
-
-    char* getNumeBeneficiar() const
-    {
-        char *nume_beneficiar_get = new char[strlen(nume_beneficiar)+1];
-        strcpy(nume_beneficiar_get, nume_beneficiar);
-        return nume_beneficiar_get; 
+        return this -> serviciu -> getNumeServiciu();
     }
 
     char* getDataTranzactie() const
@@ -74,32 +57,26 @@ Tranzactie(const char *nume_beneficiar, const char *prenume_beneficiar, const ch
         return data_tranzactie_get; 
     }
 
-    int& getSumaTranzactie()
+    double getSumaTranzactie()
     {
-        return suma_tranzactie;
+        return this -> serviciu -> getCost(*beneficiar);
     }
 
     //Settere
-    void setNumeServiciu(const char* nume_serviciu)
+    void setNumeBeneficiar(const char* nume_nou)
     {
-        delete[] this -> nume_serviciu;
-        this -> nume_serviciu = new char[strlen(nume_serviciu)+1];
-        strcpy(this -> nume_serviciu, nume_serviciu);
-    }
+        this -> beneficiar ->setNume(nume_nou);
+    } 
 
-    void setPrenumeBeneficiar(const char* prenume_beneficiar)
+    void setPreumeBeneficiar(const char* prenume_nou)
     {
-        delete[] this -> prenume_beneficiar;
-        this -> prenume_beneficiar = new char[strlen(prenume_beneficiar)+1];
-        strcpy(this -> prenume_beneficiar, prenume_beneficiar);
-    }
+        this -> beneficiar ->setPrenume(prenume_nou);
+    } 
 
-    void setNumeBeneficiar(const char* nume_beneficiar)
+    void setNumeServiciu(const char* nume_nou)
     {
-        delete[] this -> nume_beneficiar;
-        this -> nume_beneficiar = new char[strlen(nume_beneficiar)+1];
-        strcpy(this -> nume_beneficiar, nume_beneficiar);
-    }
+        this -> serviciu ->setNumeServiciu(nume_nou);
+    } 
 
     void setDataTranzactie(const char* data_tranzactie)
     {
@@ -108,17 +85,14 @@ Tranzactie(const char *nume_beneficiar, const char *prenume_beneficiar, const ch
         strcpy(this -> data_tranzactie, data_tranzactie);
     }
 
-    void setSumaTranzactie(int varsta)
+    void setSumaTranzactie(int cost)
     {
-        this -> suma_tranzactie = suma_tranzactie;
+        this -> serviciu -> setCost(cost);
     }
 
     //Destructor
     ~Tranzactie()
     {
-        delete[] nume_serviciu;
-        delete[] prenume_beneficiar;
-        delete[] nume_beneficiar;
         delete[] data_tranzactie;
     }
 };
